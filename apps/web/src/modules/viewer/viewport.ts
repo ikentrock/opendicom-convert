@@ -2,7 +2,6 @@ import {
   RenderingEngine,
   Enums,
   type Types,
-  eventTarget,
   EVENTS,
 } from '@cornerstonejs/core'
 import {
@@ -77,11 +76,13 @@ export async function displayImage(
 
 export function captureCanvas(viewport: Types.IStackViewport): Promise<HTMLCanvasElement> {
   return new Promise((resolve) => {
+    // IMAGE_RENDERED is dispatched on the viewport's DOM element, not the global eventTarget
+    const el = viewport.element
     const handler = () => {
-      eventTarget.removeEventListener(EVENTS.IMAGE_RENDERED, handler)
+      el.removeEventListener(EVENTS.IMAGE_RENDERED, handler)
       resolve(viewport.canvas)
     }
-    eventTarget.addEventListener(EVENTS.IMAGE_RENDERED, handler)
+    el.addEventListener(EVENTS.IMAGE_RENDERED, handler)
     viewport.render()
   })
 }
