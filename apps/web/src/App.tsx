@@ -8,6 +8,7 @@ import { parseDicomMetadata } from './modules/dicom/parser'
 import { groupIntoStudies } from './modules/dicom/grouper'
 import { getImageIdForFile } from './modules/viewer/cornerstoneInit'
 import { clearSession } from './modules/privacy/guard'
+import { extractFilesFromZip } from './modules/dicom/zipExtractor'
 import type { DicomFile } from './types'
 
 const INITIAL_EXPORT_OPTIONS: ExportOptions = {
@@ -76,13 +77,29 @@ export default function App() {
 
   const handleFiles = useCallback(async (files: File[]) => {
     setLoading(true)
-    dispatch({ type: 'FILES_DROPPED', files })
+
+    // Expand ZIP files into their contents
+    const expandedFiles: File[] = []
+    const errors: string[] = []
+    for (const file of files) {
+      if (file.name.toLowerCase().endsWith('.zip')) {
+        try {
+          const extracted = await extractFilesFromZip(file)
+          expandedFiles.push(...extracted)
+        } catch (err) {
+          errors.push(`${file.name}: ${(err as Error).message}`)
+        }
+      } else {
+        expandedFiles.push(file)
+      }
+    }
+
+    dispatch({ type: 'FILES_DROPPED', files: expandedFiles })
 
     const dicomFiles: DicomFile[] = []
-    const errors: string[] = []
 
     await Promise.all(
-      files.map(async (file) => {
+      expandedFiles.map(async (file) => {
         try {
           const valid = await isDicomFile(file)
           if (!valid) return

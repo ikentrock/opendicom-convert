@@ -71,6 +71,8 @@ export async function displayImage(
   index = 0
 ): Promise<void> {
   await viewport.setStack(imageIds, index)
+  viewport.resetCamera()
+  viewport.resetProperties()
   viewport.render()
 }
 

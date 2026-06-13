@@ -65,7 +65,7 @@ export function FileDropZone({ onFiles, disabled = false }: Props) {
     >
       <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>📂</div>
       <p style={{ color: '#94a3b8', marginBottom: '1.5rem' }}>
-        Arrastra archivos DICOM aquí, o usa los botones de abajo
+        Arrastra archivos DICOM o un ZIP aquí, o usa los botones de abajo
       </p>
       <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
         <button
@@ -73,7 +73,7 @@ export function FileDropZone({ onFiles, disabled = false }: Props) {
           disabled={disabled}
           style={btnStyle}
         >
-          Seleccionar archivos (.dcm)
+          Seleccionar archivos (.dcm, .zip)
         </button>
         <button
           onClick={() => folderInputRef.current?.click()}
@@ -86,7 +86,7 @@ export function FileDropZone({ onFiles, disabled = false }: Props) {
       <input
         ref={fileInputRef}
         type="file"
-        accept=".dcm,application/dicom"
+        accept=".dcm,.zip,application/dicom"
         multiple
         style={{ display: 'none' }}
         onChange={handleFileInput}
