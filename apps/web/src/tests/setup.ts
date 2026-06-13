@@ -1,5 +1,47 @@
 import '@testing-library/jest-dom'
 
+// Node.js 26 adds experimental localStorage/sessionStorage globals that are undefined
+// unless --localstorage-file is set. This shadows jsdom's versions in the global scope.
+// Provide in-memory implementations so tests that rely on Web Storage APIs work correctly.
+function makeStorage(): Storage {
+  let store: Record<string, string> = {}
+  return {
+    get length() {
+      return Object.keys(store).length
+    },
+    key(index: number): string | null {
+      return Object.keys(store)[index] ?? null
+    },
+    getItem(key: string): string | null {
+      return Object.prototype.hasOwnProperty.call(store, key) ? store[key] : null
+    },
+    setItem(key: string, value: string): void {
+      store[key] = String(value)
+    },
+    removeItem(key: string): void {
+      delete store[key]
+    },
+    clear(): void {
+      store = {}
+    },
+  }
+}
+
+if (typeof localStorage === 'undefined' || localStorage === null) {
+  Object.defineProperty(globalThis, 'localStorage', {
+    value: makeStorage(),
+    writable: true,
+    configurable: true,
+  })
+}
+if (typeof sessionStorage === 'undefined' || sessionStorage === null) {
+  Object.defineProperty(globalThis, 'sessionStorage', {
+    value: makeStorage(),
+    writable: true,
+    configurable: true,
+  })
+}
+
 // Canvas.toBlob is not implemented in jsdom — stub for unit tests
 HTMLCanvasElement.prototype.toBlob = function (
   callback: BlobCallback,

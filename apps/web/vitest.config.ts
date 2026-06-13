@@ -16,5 +16,13 @@ export default defineConfig({
       'src/**/*.{test,spec}.{ts,tsx}',
       '../../tests/**/*.{test,spec}.{ts,tsx}',
     ],
+    environmentOptions: {
+      jsdom: {
+        // Node.js 26 adds experimental localStorage/sessionStorage globals,
+        // which causes vitest's populateGlobal to skip jsdom's versions.
+        // Listing them as additionalKeys forces jsdom's implementations to win.
+        additionalKeys: ['localStorage', 'sessionStorage'],
+      },
+    },
   },
 })
