@@ -1,33 +1,31 @@
-# Privacy Model
+# Modelo de Privacidad
 
-OpenDICOM Convert is designed to process all DICOM files entirely within your browser.
+OpenDICOM Convert está diseñado para procesar todos los archivos DICOM completamente dentro de tu navegador.
 
-## What we do NOT do
+## Lo que NO hacemos
 
-- Do not upload your files or any file contents
-- Do not store patient data in localStorage, sessionStorage, or IndexedDB
-- Do not use cookies
-- Do not use analytics or crash-reporting SDKs
-- Do not load scripts from external CDNs (all dependencies are bundled at build time)
-- Do not make any network requests with patient data
+- No subimos tus archivos ni su contenido a ningún servidor
+- No almacenamos datos del paciente en localStorage, sessionStorage ni IndexedDB
+- No usamos cookies
+- No usamos SDKs de analíticas ni reportes de errores
+- No cargamos scripts desde CDNs externos (todas las dependencias se incluyen en el bundle en tiempo de compilación)
+- No realizamos ninguna petición de red con datos del paciente
 
-## What happens to your data
+## ¿Qué pasa con tus datos?
 
-1. You select DICOM files from your local device using the browser File API
-2. Files are read into browser memory — they never leave your machine
-3. Pixel data is decoded and rendered by Cornerstone3D using WebGL
-4. Exports are generated from the WebGL canvas and downloaded directly to your device
-5. All data is cleared when you click "Start over" or close the tab
+1. Seleccionas los archivos DICOM desde tu dispositivo local usando la File API del navegador
+2. Los archivos se leen en la memoria del navegador — nunca salen de tu máquina
+3. Los datos de píxeles son decodificados y renderizados por Cornerstone3D usando WebGL
+4. Las exportaciones se generan desde el canvas WebGL y se descargan directamente a tu dispositivo
+5. Todos los datos se eliminan cuando haces clic en "Empezar de nuevo" o cierras la pestaña
 
-## Metadata
+## Metadatos
 
-The app reads non-identifying metadata for grouping (Study UID, Series UID, Instance Number,
-Modality, Descriptions). Patient Name, Patient ID, Date of Birth, Accession Number,
-Referring Physician, and Institution Name are never read into application state.
+La aplicación lee metadatos no identificatorios para agrupar imágenes (Study UID, Series UID, Número de instancia, Modalidad, Descripciones). Nombre del paciente, ID del paciente, Fecha de nacimiento, Número de acceso, Médico referente y Nombre de la institución **nunca se leen** en el estado de la aplicación.
 
-## Content Security Policy
+## Política de Seguridad de Contenido (CSP)
 
-For production deployments, add this response header (see `apps/web/public/_headers`):
+Para despliegues en producción, agrega este encabezado de respuesta (ver `apps/web/public/_headers`):
 
 ```
 Content-Security-Policy: default-src 'self'; script-src 'self'; worker-src 'self' blob:;
@@ -35,10 +33,9 @@ Content-Security-Policy: default-src 'self'; script-src 'self'; worker-src 'self
   object-src 'none'; base-uri 'none'; form-action 'none';
 ```
 
-This blocks all external network calls from the page.
+Esto bloquea todas las llamadas de red externas desde la página.
 
-## Privacy test
+## Prueba de privacidad
 
-A Playwright E2E test (`tests/e2e/noUpload.spec.ts`) intercepts all network requests during
-DICOM file processing and asserts that zero binary POST/PUT requests are made.
-Run it with: `cd apps/web && npx playwright test tests/e2e/noUpload.spec.ts`
+Una prueba E2E con Playwright (`tests/e2e/noUpload.spec.ts`) intercepta todas las peticiones de red durante el procesamiento de archivos DICOM y verifica que no se realiza ninguna petición POST/PUT binaria.
+Ejecútala con: `cd apps/web && npx playwright test tests/e2e/noUpload.spec.ts`

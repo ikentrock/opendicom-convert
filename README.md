@@ -1,10 +1,12 @@
 # OpenDICOM Convert
 
-Open DICOM medical imaging files locally in your browser and export them to PNG or JPG.
+Abre archivos DICOM de imágenes médicas directamente en tu navegador y expórtalos a PNG o JPG.
 
-**No upload. No server. No patient data leaves your device.**
+**Sin subida de archivos. Sin servidor. Los datos del paciente nunca salen de tu dispositivo.**
 
-## Quick start
+---
+
+## Inicio rápido
 
 ```bash
 cd apps/web
@@ -12,51 +14,59 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173, select DICOM files (.dcm), preview them, and export.
+Abre http://localhost:5173, selecciona tus archivos DICOM (.dcm), previsualízalos y expórtalos.
 
-## What it does
+## ¿Qué hace?
 
-- Opens `.dcm` files (DICOM Part 10 format)
-- Groups files by study and series automatically
-- Displays images using Cornerstone3D WebGL renderer
-- Exports current image as PNG/JPG, or batch-exports series/all as a ZIP
-- Runs entirely in the browser — nothing is uploaded
+- Abre archivos `.dcm` (formato DICOM Parte 10)
+- Agrupa los archivos por estudio y serie automáticamente
+- Muestra las imágenes usando el renderizador WebGL de Cornerstone3D
+- Exporta la imagen actual como PNG o JPG, o exporta en lote series completas como ZIP
+- Funciona completamente en el navegador — no se sube nada a ningún servidor
 
-## Privacy
+## Privacidad
 
-All processing happens locally in your browser using the File API and WebGL canvas.
-No analytics, no cookies, no network calls. See [PRIVACY.md](PRIVACY.md) for details.
+Todo el procesamiento ocurre localmente en tu navegador usando la File API y WebGL.
+Sin analíticas, sin cookies, sin llamadas de red. Consulta [PRIVACY.md](PRIVACY.md) para más detalles.
 
-## Running tests
+## Caso de uso típico
+
+Tienes un CD médico con imágenes de resonancia magnética (u otro estudio) y un visor que solo funciona en Windows. Con OpenDICOM Convert puedes:
+
+1. Insertar el CD y seleccionar la carpeta DICOM desde el navegador
+2. Previsualizar las imágenes en cualquier sistema operativo
+3. Exportarlas como PNG o JPG para compartirlas fácilmente con tu médico
+
+## Ejecutar pruebas
 
 ```bash
-# Unit tests
+# Pruebas unitarias
 cd apps/web && npm test
 
-# E2E tests (includes privacy proof test)
+# Pruebas E2E (incluye prueba de privacidad — verifica que no se sube nada)
 cd apps/web && npx playwright test
 ```
 
-## Building for production
+## Compilar para producción
 
 ```bash
 cd apps/web && npm run build
 ```
 
-Static files output to `apps/web/dist/`. Deploy to any static host (Netlify, Vercel, GitHub Pages, nginx).
+Los archivos estáticos se generan en `apps/web/dist/`. Despliega en cualquier hosting estático (Netlify, Vercel, GitHub Pages, nginx).
 
-## Supported browsers
+## Navegadores compatibles
 
-Chrome, Edge, Firefox, Safari (latest). Folder upload requires Chrome or Edge.
+Chrome, Edge, Firefox, Safari (versiones recientes). La carga de carpetas completas requiere Chrome o Edge.
 
-## Limitations
+## Limitaciones
 
-See [docs/limitations.md](docs/limitations.md).
+Consulta [docs/limitations.md](docs/limitations.md).
 
-## License
+## Licencia
 
 [Apache 2.0](LICENSE)
 
-## Disclaimer
+## Aviso importante
 
-**This software is not a medical device.** It is not intended for diagnosis, treatment decisions, or clinical interpretation. Always consult a qualified healthcare professional for medical advice.
+**Este software no es un dispositivo médico.** No está diseñado para diagnóstico, decisiones de tratamiento ni interpretación clínica. Consulta siempre a un profesional de la salud calificado para obtener consejo médico.

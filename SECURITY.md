@@ -1,22 +1,22 @@
-# Security Policy
+# Política de Seguridad
 
-## Reporting a Vulnerability
+## Reportar una Vulnerabilidad
 
-Please open a GitHub issue tagged `security` or contact the maintainers directly.
-Do not disclose publicly until a fix is available.
+Por favor, abre un issue en GitHub con la etiqueta `security` o contacta directamente a los mantenedores.
+No divulgues la vulnerabilidad públicamente hasta que haya un parche disponible.
 
-## Security Design
+## Diseño de Seguridad
 
-The primary concern is preventing patient data leakage:
+La preocupación principal es prevenir la filtración de datos del paciente:
 
-- No DICOM content or metadata is transmitted over any network
-- Patient-identifying DICOM tags are never parsed into application state
-- File type is validated (DICM magic bytes) before processing
-- All dependencies are bundled at build time — no external CDN scripts
-- Content Security Policy blocks external network calls in production
-- `connect-src 'none'` in the CSP prevents any fetch/XHR calls
-- A Playwright test proves no binary upload occurs during normal usage
+- Ningún contenido DICOM ni metadato se transmite por la red
+- Las etiquetas DICOM identificatorias del paciente nunca se leen en el estado de la aplicación
+- El tipo de archivo se valida (bytes mágicos DICM) antes de procesarlo
+- Todas las dependencias se incluyen en el bundle en tiempo de compilación — sin scripts de CDN externos
+- La Política de Seguridad de Contenido bloquea las llamadas de red externas en producción
+- `connect-src 'none'` en la CSP impide cualquier llamada fetch/XHR
+- Una prueba con Playwright verifica que no ocurre ninguna subida binaria durante el uso normal
 
-## Dependency Scanning
+## Escaneo de Dependencias
 
-Run `npm audit` to check for known vulnerabilities in dependencies.
+Ejecuta `npm audit` para verificar vulnerabilidades conocidas en las dependencias.
