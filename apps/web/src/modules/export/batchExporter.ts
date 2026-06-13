@@ -2,7 +2,7 @@ import type { DicomFile, ExportOptions, Study } from '../../types'
 import { canvasToBlob, sequentialFilename } from './imageExporter'
 import { downloadAsZip, type ZipEntry } from './zipExporter'
 import type { Types } from '@cornerstonejs/core'
-import { displayImage, captureCanvas } from '../viewer/viewport'
+import { captureCanvas, captureFromImageId } from '../viewer/viewport'
 
 export interface BatchExportParams {
   scope: 'current' | 'series' | 'all'
@@ -65,9 +65,7 @@ export async function runBatchExport(params: BatchExportParams): Promise<void> {
   for (let i = 0; i < images.length; i++) {
     if (signal.aborted) throw new DOMException('Export cancelled', 'AbortError')
 
-    const imageId = images[i].imageId
-    await displayImage(viewport, [imageId])
-    const canvas = await captureCanvas(viewport)
+    const canvas = await captureFromImageId(viewport, images[i].imageId)
     const blob = await canvasToBlob(canvas, options.format, options.quality)
     entries.push({ path: sequentialFilename(i, options.format), blob })
     onProgress(i + 1, images.length)

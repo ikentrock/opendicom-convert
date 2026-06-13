@@ -66,7 +66,7 @@ export function ExportPanel({ options, onChange, onExport, disabled }: Props) {
         {([
           ['current', 'Imagen actual'],
           ['series', 'Serie completa'],
-          ['all', 'Todas las imágenes'],
+          ['all', 'Todo el estudio'],
         ] as [ExportScope, string][]).map(([value, label]) => (
           <label
             key={value}

@@ -88,3 +88,27 @@ export function captureCanvas(viewport: Types.IStackViewport): Promise<HTMLCanva
     viewport.render()
   })
 }
+
+// For batch export: registers the listener BEFORE loading the image to avoid
+// the race condition where IMAGE_RENDERED fires before the listener is added.
+export function captureFromImageId(
+  viewport: Types.IStackViewport,
+  imageId: string
+): Promise<HTMLCanvasElement> {
+  return new Promise((resolve, reject) => {
+    const el = viewport.element
+    const handler = () => {
+      el.removeEventListener(EVENTS.IMAGE_RENDERED, handler)
+      resolve(viewport.canvas)
+    }
+    el.addEventListener(EVENTS.IMAGE_RENDERED, handler)
+
+    void viewport
+      .setStack([imageId], 0)
+      .then(() => { viewport.render() })
+      .catch((err) => {
+        el.removeEventListener(EVENTS.IMAGE_RENDERED, handler)
+        reject(err)
+      })
+  })
+}
