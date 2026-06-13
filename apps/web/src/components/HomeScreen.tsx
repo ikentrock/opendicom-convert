@@ -13,7 +13,7 @@ export function HomeScreen({ onFiles, loading }: Props) {
         OpenDICOM Convert
       </h1>
       <p style={{ color: '#64748b', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
-        Open DICOM files and convert them to PNG or JPG. Everything happens locally in your browser.
+        Abre archivos DICOM y conviértelos a PNG o JPG. Todo ocurre localmente en tu navegador.
       </p>
 
       <PrivacyBanner />
@@ -22,14 +22,14 @@ export function HomeScreen({ onFiles, loading }: Props) {
 
       {loading && (
         <p style={{ textAlign: 'center', color: '#94a3b8', marginTop: '1rem' }}>
-          Scanning files…
+          Analizando archivos…
         </p>
       )}
 
       <div style={{ marginTop: '2rem', textAlign: 'center' }}>
         <p style={{ color: '#475569', fontSize: '0.8rem' }}>
-          ⚠️ Not intended for diagnosis, treatment decisions, or clinical interpretation.
-          Always consult a qualified healthcare professional.
+          ⚠️ No está indicado para diagnóstico, decisiones de tratamiento ni interpretación clínica.
+          Consulta siempre a un profesional sanitario cualificado.
         </p>
       </div>
     </div>

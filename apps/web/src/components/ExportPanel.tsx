@@ -35,10 +35,10 @@ export function ExportPanel({ options, onChange, onExport, disabled }: Props) {
         textTransform: 'uppercase',
         letterSpacing: '0.05em',
       }}>
-        Export
+        Exportar
       </h3>
 
-      <span style={labelStyle}>Format</span>
+      <span style={labelStyle}>Formato</span>
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem' }}>
         {(['png', 'jpeg'] as ExportFormat[]).map(f => (
           <button key={f} onClick={() => onChange({ format: f })} style={chipBtn(options.format === f)}>
@@ -49,7 +49,7 @@ export function ExportPanel({ options, onChange, onExport, disabled }: Props) {
 
       {options.format === 'jpeg' && (
         <>
-          <span style={labelStyle}>JPEG quality: {Math.round(options.quality * 100)}%</span>
+          <span style={labelStyle}>Calidad JPEG: {Math.round(options.quality * 100)}%</span>
           <input
             type="range"
             min={70}
@@ -61,12 +61,12 @@ export function ExportPanel({ options, onChange, onExport, disabled }: Props) {
         </>
       )}
 
-      <span style={labelStyle}>Scope</span>
+      <span style={labelStyle}>Alcance</span>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem', marginBottom: '1rem' }}>
         {([
-          ['current', 'Current image'],
-          ['series', 'Whole series'],
-          ['all', 'All images'],
+          ['current', 'Imagen actual'],
+          ['series', 'Serie completa'],
+          ['all', 'Todas las imágenes'],
         ] as [ExportScope, string][]).map(([value, label]) => (
           <label
             key={value}
@@ -99,7 +99,7 @@ export function ExportPanel({ options, onChange, onExport, disabled }: Props) {
           width: '100%',
         }}
       >
-        {options.scope !== 'current' ? 'Export as ZIP' : 'Export'}
+        {options.scope !== 'current' ? 'Exportar como ZIP' : 'Exportar'}
       </button>
     </div>
   )

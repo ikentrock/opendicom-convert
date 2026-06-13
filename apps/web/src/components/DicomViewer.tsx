@@ -70,7 +70,7 @@ export function DicomViewer({ imageIds, currentIndex, onIndexChange, onViewportR
             disabled={currentIndex === 0}
             style={navBtn}
           >
-            ← Prev
+            ← Anterior
           </button>
           <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
             {currentIndex + 1} / {imageIds.length}
@@ -80,7 +80,7 @@ export function DicomViewer({ imageIds, currentIndex, onIndexChange, onViewportR
             disabled={currentIndex === imageIds.length - 1}
             style={navBtn}
           >
-            Next →
+            Siguiente →
           </button>
         </div>
       )}

@@ -26,12 +26,12 @@ export function ImportReview({
   const totalSeries = studies.reduce((n, s) => n + s.series.length, 0)
 
   const rows = [
-    ['Files selected', totalFiles],
-    ['Valid DICOM files', validDicomCount],
-    ['Skipped (not DICOM)', skippedCount],
-    ['Studies detected', studies.length],
-    ['Series detected', totalSeries],
-    ['Total images', totalImages],
+    ['Archivos seleccionados', totalFiles],
+    ['Archivos DICOM válidos', validDicomCount],
+    ['Omitidos (no son DICOM)', skippedCount],
+    ['Estudios detectados', studies.length],
+    ['Series detectadas', totalSeries],
+    ['Imágenes totales', totalImages],
   ] as const
 
   return (
@@ -39,7 +39,7 @@ export function ImportReview({
       style={{ maxWidth: '680px', margin: '0 auto', padding: '2rem 1rem' }}
       data-testid="import-review"
     >
-      <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem' }}>Import Summary</h2>
+      <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem' }}>Resumen de importación</h2>
 
       <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
         <tbody>
@@ -57,7 +57,7 @@ export function ImportReview({
           background: '#1e1a00', border: '1px solid #713f12', borderRadius: '6px',
           padding: '0.75rem', marginBottom: '1rem',
         }}>
-          <strong style={{ color: '#fbbf24' }}>Warnings ({errors.length})</strong>
+          <strong style={{ color: '#fbbf24' }}>Avisos ({errors.length})</strong>
           <ul style={{ color: '#fde68a', fontSize: '0.8rem', marginTop: '0.25rem', paddingLeft: '1rem' }}>
             {errors.map((e, i) => <li key={i}>{e}</li>)}
           </ul>
@@ -66,14 +66,14 @@ export function ImportReview({
 
       {validDicomCount === 0 ? (
         <p style={{ color: '#f87171', marginBottom: '1rem' }}>
-          No valid DICOM files were found. Please select .dcm files.
+          No se encontraron archivos DICOM válidos. Por favor, selecciona archivos .dcm.
         </p>
       ) : (
         <button onClick={onContinue} style={{ ...primaryBtn, marginRight: '0.75rem' }}>
-          Open Viewer →
+          Abrir visor →
         </button>
       )}
-      <button onClick={onClear} style={secondaryBtn}>Start over</button>
+      <button onClick={onClear} style={secondaryBtn}>Empezar de nuevo</button>
     </div>
   )
 }

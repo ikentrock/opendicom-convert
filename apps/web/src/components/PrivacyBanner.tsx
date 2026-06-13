@@ -14,7 +14,7 @@ export function PrivacyBanner() {
     }}>
       <span role="img" aria-label="lock">🔒</span>
       <span>
-        <strong>Private by design.</strong> Files are processed locally in your browser and never uploaded to any server.
+        <strong>Privacidad por diseño.</strong> Los archivos se procesan localmente en tu navegador y nunca se suben a ningún servidor.
       </span>
     </div>
   )

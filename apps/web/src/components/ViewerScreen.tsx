@@ -99,7 +99,7 @@ export function ViewerScreen({
             marginBottom: '0.75rem',
           }}
         >
-          ← Start over
+          ← Empezar de nuevo
         </button>
         {studies.map((s, si) => (
           <div key={s.studyInstanceUID} style={{ marginBottom: '0.5rem' }}>
@@ -107,7 +107,7 @@ export function ViewerScreen({
               onClick={() => { setSelectedStudyIdx(si); setSelectedSeriesIdx(0); setSelectedImageIdx(0) }}
               style={sidebarItemStyle(selectedStudyIdx === si)}
             >
-              📋 {s.description ?? `Study ${si + 1}`}
+              📋 {s.description ?? `Estudio ${si + 1}`}
             </div>
             {selectedStudyIdx === si && s.series.map((r, ri) => (
               <div
@@ -120,7 +120,7 @@ export function ViewerScreen({
                   color: '#94a3b8',
                 }}
               >
-                🔹 {r.description ?? `Series ${ri + 1}`} ({r.images.length})
+                🔹 {r.description ?? `Serie ${ri + 1}`} ({r.images.length})
               </div>
             ))}
           </div>

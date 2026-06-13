@@ -65,7 +65,7 @@ export function FileDropZone({ onFiles, disabled = false }: Props) {
     >
       <div style={{ fontSize: '2.5rem', marginBottom: '0.75rem' }}>📂</div>
       <p style={{ color: '#94a3b8', marginBottom: '1.5rem' }}>
-        Drag DICOM files here, or use the buttons below
+        Arrastra archivos DICOM aquí, o usa los botones de abajo
       </p>
       <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
         <button
@@ -73,14 +73,14 @@ export function FileDropZone({ onFiles, disabled = false }: Props) {
           disabled={disabled}
           style={btnStyle}
         >
-          Select files (.dcm)
+          Seleccionar archivos (.dcm)
         </button>
         <button
           onClick={() => folderInputRef.current?.click()}
           disabled={disabled}
           style={{ ...btnStyle, background: disabled ? '#1e293b' : '#334155' }}
         >
-          Select folder
+          Seleccionar carpeta
         </button>
       </div>
       <input
