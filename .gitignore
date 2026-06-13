@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+
+# Vite
+.vite/
+
+# Worktrees
+.worktrees/
+
+# OS
+.DS_Store
+*.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Test outputs
+test-results/
+playwright-report/
+coverage/
+
+# Environment
+.env
+.env.local
+.env.*.local
